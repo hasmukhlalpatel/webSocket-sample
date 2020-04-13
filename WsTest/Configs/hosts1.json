@@ -16,7 +16,7 @@
         //}
       },
       "HttpsInlineCertFile1": {
-        "Url": "https://www3.hasmukhpatel.me:5003",
+        "Url": "https://localhost.local:5003",
         "Protocols": "Http1AndHttp2",
         "Certificate": {
           "Path": ".\\Configs\\localhost.pfx",
@@ -24,7 +24,7 @@
         }
       },
       "HttpsInlineCertFile2": {
-        "Url": "https://www3.hasmukhpatel.info:5005",
+        "Url": "https://localhost.local:5005",
         "Protocols": "Http1AndHttp2",
         "Certificate": {
           "Path": ".\\Configs\\localhost.pfx",
