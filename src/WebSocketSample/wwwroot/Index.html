@@ -4,7 +4,8 @@
 </head>
 
 <body>
-
+    <span><a href="http://localhost:5000">use http</a> for websocket, it doesn't work with https</span>
+    <br />
     <button id="startButton">Start</button>
 
     <input type=text id="textInput" placeholder="Enter your text" />
@@ -42,7 +43,7 @@
         });
 
         var _startButton = document.getElementById("startButton");
-        _startButton.addEventListener("click", function () { connect();});
+        _startButton.addEventListener("click", function () { connect(); });
         function sendMessage(message) {
             console.log("Sending: " + message);
             socket.send(message);
@@ -53,6 +54,14 @@
             list.appendChild(item);
         }
     </script>
+
+    <br />
+    <h2>Other samlpe url</h2>
+    <a href="/map1">Map1</a>
+    <br />
+    <a href="/map2">Map2</a>
+    <br />
+    <a href="/healthcheck">healthcheck</a>
 
 </body>
 </html>

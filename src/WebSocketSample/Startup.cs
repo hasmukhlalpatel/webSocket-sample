@@ -11,9 +11,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Microsoft.Extensions.Logging.Debug;
 using Microsoft.Extensions.Hosting;
+using WebSocketSample.Extensions;
 
-
-namespace WsTest
+namespace WebSocketSample
 {
     public class Startup
     {
@@ -91,8 +91,54 @@ namespace WsTest
 
             });
             #endregion
-            app.UseFileServer();
+
+            //https://stackoverflow.com/questions/58016988/determine-static-files-based-off-route-or-domain-in-asp-net-core-for-spa
+            app.UseDefaultFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    var request = ctx.Context.Request;
+                }
+            });
+
+            //app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGet("/healthcheck", async context =>
+                {
+                    await context.Response.WriteAsync("Health check!");
+                });
+            });
+
+            app.Map("/map1", HandleMapTest1);
+
+            app.Map("/map2", HandleMapTest2);
+
+            app.Use404NotFound();
+
         }
+
+        private static void HandleMapTest1(IApplicationBuilder app)
+        {
+            app.Run(async context =>
+            {
+                await context.Response.WriteAsync("Map Test 1");
+            });
+        }
+
+        private static void HandleMapTest2(IApplicationBuilder app)
+        {
+            app.Run(async context =>
+            {
+                await context.Response.WriteAsync("Map Test 2");
+            });
+        }
+
+
         #region Echo
         private async Task Echo(HttpContext context, WebSocket webSocket)
         {
